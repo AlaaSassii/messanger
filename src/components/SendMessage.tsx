@@ -3,7 +3,7 @@ import { useUserContext } from '../contexts/user'
 import {BsFillSendFill} from 'react-icons/bs'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../config/firebaseConfig' ;
-const SendMessage = () => {
+const SendMessage = ({scroll}:any) => {
   // states
   const {user:{uid , displayName , photoURL}}:any = useUserContext()
   const [message , setmessage] = useState<string>("");
@@ -18,7 +18,7 @@ const SendMessage = () => {
       name:displayName ,
       avatar:photoURL , 
       createdAt:serverTimestamp() 
-    }).then(()=>setmessage(""))
+    }).then(()=>{setmessage(""); scroll.current.scrollIntoView({ behavior: "smooth" });})
 
   } 
   
